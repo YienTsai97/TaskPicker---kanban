@@ -2,7 +2,7 @@
     <div class="head-top">
         <div class="head-left">
             <img
-                src="../../public/kanban_brand-icon.svg"
+                src="/kanban_brand-icon.svg"
                 width="40px"
                 height="32px"
                 alt="brand"
@@ -12,7 +12,7 @@
             <label for="site-search" class="search-area">
                 <button class="search-btn">
                     <img
-                        src="../../public/search-icon.svg"
+                        src="/search-icon.svg"
                         width="20px"
                         height="20px"
                         alt="search"
@@ -31,20 +31,15 @@
         </div>
         <div class="head-right">
             <img
-                src="../../public/filter-icon.svg"
+                src="/filter-icon.svg"
                 width="25x"
                 height="25px"
                 alt="filter"
             />
-            <img
-                src="../../public/bell-icon.svg"
-                width="25x"
-                height="25px"
-                alt="bell"
-            />
+            <img src="/bell-icon.svg" width="25x" height="25px" alt="bell" />
             <img
                 class="user-profile"
-                src="../../public/profile-demo.jpg"
+                src="/profile-demo.jpg"
                 width="25px"
                 height="25px"
                 alt="user"
@@ -290,7 +285,7 @@
     document.addEventListener("DOMContentLoaded", () => {
         checksiz();
     });
-    window.addEventListener("resize", (event: any) => {
+    window.addEventListener("resize", () => {
         checksiz();
     });
 
