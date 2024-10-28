@@ -1,0 +1,55 @@
+<div class="column in-progress khula-regular">
+    <div class="top">
+        <div class="title">
+            <img
+                src="../../public/inProgress-icon.svg"
+                width="23px"
+                height="23px"
+                alt="in-progress"
+            />
+            <h3 class="lexend-deca-normal">In Progress</h3>
+        </div>
+        <img
+            class="col-dots"
+            src="../../public/dots-icon.svg"
+            width="29px"
+            height="29px"
+            alt="col-dots"
+        />
+    </div>
+
+    <div id="inprogress-area" class="list">
+        <!-- <div id="inprogress-area"></div> -->
+    </div>
+
+    <div class="bottom"></div>
+</div>
+
+<style>
+    .top,
+    .bottom {
+        background-color: #6267ff;
+    }
+
+    #inprogress-area {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        padding: 10px 10px 0 10px;
+        width: 100%;
+        height: 100%;
+    }
+</style>
+
+<script>
+    import { tasksList } from "../lib/TaskList";
+    const inProgressList = document.querySelector("#inprogress-area");
+    if (inProgressList) {
+        inProgressList.addEventListener("dragover", (event) =>
+            tasksList.onDragOver(event),
+        );
+        inProgressList.addEventListener("drop", (event) =>
+            tasksList.onDrop(event, tasksList.inProgress),
+        );
+    }
+</script>

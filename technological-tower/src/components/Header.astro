@@ -1,0 +1,384 @@
+<header>
+    <div class="head-top">
+        <div class="head-left">
+            <img
+                src="../../public/kanban_brand-icon.svg"
+                width="40px"
+                height="32px"
+                alt="brand"
+            />
+        </div>
+        <div class="head-mid head-search">
+            <label for="site-search" class="search-area">
+                <button class="search-btn">
+                    <img
+                        src="../../public/search-icon.svg"
+                        width="20px"
+                        height="20px"
+                        alt="search"
+                    />
+                </button>
+                <input
+                    class="khula-regular"
+                    type="search"
+                    id="site-search"
+                    name="search-task"
+                    placeholder="Search Task"
+                    autocomplete="off"
+                />
+                <div id="search-result"></div>
+            </label>
+        </div>
+        <div class="head-right">
+            <img
+                src="../../public/filter-icon.svg"
+                width="25x"
+                height="25px"
+                alt="filter"
+            />
+            <img
+                src="../../public/bell-icon.svg"
+                width="25x"
+                height="25px"
+                alt="bell"
+            />
+            <img
+                class="user-profile"
+                src="../../public/profile-demo.jpg"
+                width="25px"
+                height="25px"
+                alt="user"
+            />
+        </div>
+    </div>
+    <nav class=""></nav>
+    <div class="modal js-modal">
+        <div class="modal-container">
+            <div class="modal-close js-modal-close">×</div>
+            <div class="modal-content"></div>
+        </div>
+    </div>
+</header>
+
+<style>
+    header {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        width: 100vw;
+        height: fit-content;
+        border-bottom: 2px solid black;
+        background-color: white;
+        overflow: hidden;
+        z-index: 10;
+        padding: 16px 36px;
+    }
+
+    .head-top,
+    nav {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        gap: 25px;
+    }
+
+    .nav-padding {
+        padding: 16px 0;
+    }
+
+    .head-left {
+        width: max-content;
+    }
+
+    .head-mid {
+        display: block;
+        width: 100%;
+        max-width: 750px;
+    }
+
+    .head-search {
+        flex: 1;
+        justify-items: center;
+    }
+
+    .search-area {
+        display: flex;
+        align-items: center;
+        background-color: #f1f1f1;
+        border-radius: 10px;
+        padding: 8px 14px;
+        padding-left: 0;
+        gap: 30px;
+        width: 100%;
+        height: 40px;
+        box-shadow: inset rgb(220, 220, 220) 0px 5px 5px 0px;
+    }
+
+    input {
+        width: 100%;
+        height: max-content;
+        font-size: 14px;
+    }
+
+    input::placeholder {
+        font-size: 14px;
+        color: #9c9c9c;
+    }
+
+    input,
+    button {
+        background: transparent;
+        border: none;
+        padding: 0;
+    }
+
+    .search-btn {
+        padding-left: 14px;
+    }
+
+    .head-right {
+        display: flex;
+        gap: 25px;
+        width: max-content;
+    }
+
+    img.user-profile {
+        object-fit: cover;
+        border-radius: 50%;
+    }
+
+    #search-result {
+        background-color: #f1f1f1;
+        padding: 10px 60px;
+        max-width: 750px;
+        width: 100%;
+        position: absolute;
+        z-index: 2;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+        display: none;
+    }
+
+    .modal {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        text-align: center;
+        background: rgba(0, 0, 0, 50%);
+        padding: 40px 20px;
+        overflow: auto;
+        opacity: 0;
+        visibility: hidden;
+        transition: 0.3s;
+        box-sizing: border-box;
+    }
+
+    .modal:before {
+        content: "";
+        display: inline-block;
+        vertical-align: middle;
+        height: 100%;
+        margin-left: -0.2em;
+    }
+
+    .modal.is-active {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .modal-container {
+        position: relative;
+        display: inline-block;
+        vertical-align: middle;
+        max-width: 600px;
+        width: 90%;
+
+        .todo-task,
+        .inprogress-task,
+        .done-task {
+            display: flex;
+            flex-direction: column;
+            font-family: "Lexend Deca", serif;
+            font-weight: 400;
+            font-style: normal;
+            padding: 8px 36px;
+
+            h3 {
+                margin: 0;
+                font-family: "Lexend Deca", serif;
+                font-weight: 400;
+                font-style: normal;
+            }
+
+            span {
+                font-family: "Khula", sans-serif;
+                font-weight: 400;
+                font-style: normal;
+                font-size: 12px;
+                border-bottom: 1px solid #9c9c9c;
+            }
+
+            p {
+                font-family: "Khula", sans-serif;
+                font-weight: 500;
+                font-style: normal;
+                margin: 15px 0 0 0;
+                font-size: 16px;
+            }
+        }
+    }
+
+    .modal-close {
+        position: absolute;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        top: -20px;
+        right: -20px;
+        width: 40px;
+        height: 40px;
+        color: #fff;
+        background: #000;
+        border-radius: 50%;
+        cursor: pointer;
+    }
+
+    .modal-content {
+        background: #fff;
+        border-radius: 10px;
+        text-align: left;
+        line-height: 1.8;
+        padding: 20px;
+    }
+</style>
+
+<script>
+    import { tasksList } from "../lib/TaskList";
+    const searchInputFunction: any = document.querySelector("#site-search");
+    const searchResult: any = document.querySelector("#search-result");
+    const modal: any = document.querySelector(".js-modal");
+    const close: any = document.querySelector(".js-modal-close");
+    const modalContent: any = document.querySelector(".modal-content");
+    const searchInput: any = document.querySelector("label");
+    const navBtn: any = document.querySelector(".nav-btn");
+    const headMid: any = document.querySelector(".head-mid");
+    const navBar: any = document.querySelector("nav");
+
+    function checksiz() {
+        if (window.innerWidth > 768) {
+            searchResult.style.top = "45px";
+            headMid.prepend(searchInput);
+            navBar.style.display = "none";
+            navBtn.style.display = "none";
+            navBar.classList.remove("nav-padding");
+            navBar.style.padding = "0px 0px";
+        }
+
+        if (window.innerWidth <= 768) {
+            searchResult.style.top = "95px";
+            navBar.prepend(searchInput);
+            navBar.style.padding = "";
+            navBar.classList.add("nav-padding");
+            navBar.style.display = "block";
+            navBtn.style.display = "block";
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+        checksiz();
+    });
+    window.addEventListener("resize", (event) => {
+        checksiz();
+    });
+
+    function searchTasks() {
+        const keyword = searchInputFunction.value;
+        const resultTasks = tasksList.tasks.filter((element) => {
+            return element.title.includes(keyword);
+        });
+        searchResult.innerHTML = "";
+
+        if (resultTasks.length) {
+            resultTasks.forEach((element) => {
+                const option = document.createElement("div");
+                option.className = "result-task";
+                option.innerHTML = `${element.title}`;
+                option.addEventListener("click", () => {
+                    modalContent.innerHTML = "";
+                    const taskDetails = document.createElement("div");
+                    const taskTitle = document.createElement("h3");
+                    taskTitle.innerHTML = `${element.title}`;
+                    const taskCategory = document.createElement("span");
+                    const taskDescription = document.createElement("p");
+                    taskDescription.innerHTML = `${element.description}`;
+                    switch (element.category) {
+                        case tasksList.todo:
+                            taskCategory.innerHTML = "Stage: Todo";
+                            taskDetails.className = "todo-task";
+                            break;
+                        case tasksList.inProgress:
+                            taskCategory.innerHTML = "Stage: In Progress";
+                            taskDetails.className = "inprogress-task";
+                            break;
+
+                        case tasksList.done:
+                            taskCategory.innerHTML = "Stage: Done";
+                            taskDetails.className = "done-task";
+                            break;
+                    }
+                    taskDetails.appendChild(taskTitle);
+                    taskDetails.appendChild(taskCategory);
+                    taskDetails.appendChild(taskDescription);
+                    modalContent.appendChild(taskDetails);
+
+                    modalOpen();
+                    console.log(element.title);
+                });
+                searchResult.appendChild(option);
+                searchResult.style.display = "block";
+            });
+        } else {
+            const option = document.createElement("div");
+            option.className = "result-task";
+            option.innerHTML = "no result";
+            searchResult.appendChild(option);
+            searchResult.style.display = "block";
+        }
+    }
+
+    searchInputFunction.addEventListener("keyup", () => {
+        if (searchInputFunction.value) {
+            searchTasks();
+        }
+    });
+    searchInputFunction.addEventListener("focusin", () => {
+        if (searchInputFunction.value) {
+            searchTasks();
+        }
+    });
+
+    searchInputFunction.addEventListener("focusout", () => {
+        setTimeout(() => {
+            searchResult.style.display = "none";
+        }, 300);
+    });
+
+    function modalOpen() {
+        modal.classList.add("is-active");
+    }
+
+    function modalClose() {
+        modal.classList.remove("is-active");
+    }
+    close.addEventListener("click", modalClose);
+
+    function modalOut(e: any) {
+        if (e.target == modal) {
+            modal.classList.remove("is-active");
+        }
+    }
+    addEventListener("click", modalOut);
+</script>

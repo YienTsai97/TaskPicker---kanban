@@ -1,0 +1,33 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Title from "../components/Title.astro";
+import ToDo from "../components/ToDo.astro";
+import InProgress from "../components/InProgress.astro";
+import Done from "../components/Done.astro";
+---
+
+<BaseLayout>
+    <main>
+        <div class="col-group">
+            <ToDo />
+            <InProgress />
+            <Done />
+        </div>
+    </main>
+</BaseLayout>
+
+<script>
+    const main: any = document.querySelector("main");
+    const colGroup: any = document.querySelector(".col-group");
+    let x: number;
+
+    function handleMouse(e: any): void {
+        let scrollLength = e.clientX;
+        main.scroll(x + (scrollLength - x), 0);
+        x = scrollLength;
+    }
+
+    colGroup.addEventListener("drag", (e: any) => {
+        handleMouse(e);
+    });
+</script>
