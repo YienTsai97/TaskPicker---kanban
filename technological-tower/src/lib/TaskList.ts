@@ -1,9 +1,8 @@
 import { atom, map } from 'nanostores';
-import type InProgress from '../components/InProgress.astro';
 
-const todoArea = document.querySelector("#todo-area-list");
-const inProgressArea = document.querySelector("#inprogress-area");
-const doneArea = document.querySelector("#done-area");
+const todoArea: any = document.querySelector("#todo-area-list");
+const inProgressArea: any = document.querySelector("#inprogress-area");
+const doneArea: any = document.querySelector("#done-area");
 
 const categoryTodo = "To Do"
 const CategoryInProgress = "In Progress"
@@ -32,7 +31,7 @@ class TaskList {
     }
 
     add(newTask: Task) {
-        TaskList.tasksId ++
+        TaskList.tasksId++
         newTask.id = TaskList.tasksId
         this.tasks.push(newTask)
 
@@ -41,9 +40,9 @@ class TaskList {
 
     update(updatedTask: Task) {
         let result = prompt(`${updatedTask.title}`, `${updatedTask.description}`);
-        if(result !== null && updatedTask.description !== result){
+        if (result !== null && updatedTask.description !== result) {
             this.tasks.forEach((element) => {
-                if(element.id === updatedTask.id){
+                if (element.id === updatedTask.id) {
                     element.description = result
                 }
             })
@@ -51,7 +50,7 @@ class TaskList {
         }
     }
 
-    comfirmDelete(task: Task){
+    comfirmDelete(task: Task) {
         const modal: any = document.querySelector(".js-modal-delete")
         const deleteBtn: any = document.querySelector("#confirm-delete")
         const cancelBtn: any = document.querySelector("#cancel-delete")
@@ -64,7 +63,7 @@ class TaskList {
             modal.classList.remove('is-active');
         })
     }
-    delete(deleteTask: Task){
+    delete(deleteTask: Task) {
         const newTasks = this.tasks.filter((element) => {
             return element.id !== deleteTask.id
         })
@@ -83,31 +82,31 @@ class TaskList {
     onDrag(event: DragEvent, taskId: number): void {
         event.dataTransfer?.setData('taskId', taskId.toString());
     }
-    
+
     onDrop(event: DragEvent, newCategory: string): void {
         event.preventDefault();
-    
+
         const taskId = event.dataTransfer?.getData('taskId');
         if (taskId) {
             const task = this.tasks.find(task => task.id === parseInt(taskId));
-        if (task) {
-            task.category = newCategory;
-            this.render();
-        }
+            if (task) {
+                task.category = newCategory;
+                this.render();
+            }
         }
     }
-    
+
     onDragOver(event: DragEvent): void {
         event.preventDefault();
     }
 
     searchTask(keyword: string) {
-        const resultTasks = this.tasks.filter((element) => {
+        this.tasks.filter((element) => {
             return element.title.includes(keyword)
         })
     }
 
-    createTask(task: Task){
+    createTask(task: Task) {
         const taskDiv = document.createElement("div");
         taskDiv.className = "task-card"
         taskDiv.draggable = true;
@@ -135,21 +134,21 @@ class TaskList {
         return taskDiv
     }
 
-    render(){
+    render() {
         todoArea.innerHTML = ""
         inProgressArea.innerHTML = ""
         doneArea.innerHTML = ""
         console.log(this.tasks)
 
-        this.tasks.forEach((element, index) =>{
-            switch(element.category){
+        this.tasks.forEach((element) => {
+            switch (element.category) {
                 case categoryTodo:
                     todoArea.appendChild(this.createTask(element))
                     break;
                 case CategoryInProgress:
                     inProgressArea.appendChild(this.createTask(element))
                     break;
-    
+
                 case CategoryDone:
                     doneArea.appendChild(this.createTask(element))
                     break;

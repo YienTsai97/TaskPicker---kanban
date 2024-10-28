@@ -207,7 +207,6 @@
 
     <script>
         import { tasksList } from "../lib/TaskList";
-        import { isOpen } from "../lib/TaskList";
         const todoArea: any = document.querySelector("#todo-area-list");
         const addBtn: any = document.querySelector(".add-item-btn");
         const modal: any = document.querySelector(".js-modal-todo");
@@ -216,10 +215,10 @@
         const newTask: any = document.querySelector("#newtask-for-todo");
 
         if (todoArea) {
-            todoArea.addEventListener("dragover", (event) =>
+            todoArea.addEventListener("dragover", (event: any) =>
                 tasksList.onDragOver(event),
             );
-            todoArea.addEventListener("drop", (event) =>
+            todoArea.addEventListener("drop", (event: any) =>
                 tasksList.onDrop(event, tasksList.todo),
             );
         }
@@ -242,9 +241,8 @@
             modal.classList.add("is-active");
         }
 
-        document
-            .querySelector("#add-newtask-for-todo")
-            .addEventListener("click", addForTodo);
+        const addNewTask: any = document.querySelector("#add-newtask-for-todo");
+        addNewTask.addEventListener("click", addForTodo);
         addBtn?.addEventListener("click", showNewTask);
 
         close.addEventListener("click", () => {

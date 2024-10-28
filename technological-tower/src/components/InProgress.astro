@@ -45,10 +45,10 @@
     import { tasksList } from "../lib/TaskList";
     const inProgressList = document.querySelector("#inprogress-area");
     if (inProgressList) {
-        inProgressList.addEventListener("dragover", (event) =>
+        inProgressList.addEventListener("dragover", (event: any) =>
             tasksList.onDragOver(event),
         );
-        inProgressList.addEventListener("drop", (event) =>
+        inProgressList.addEventListener("drop", (event: any) =>
             tasksList.onDrop(event, tasksList.inProgress),
         );
     }

@@ -136,10 +136,10 @@
     const doneArea = document.querySelector("#done-area");
 
     if (doneArea) {
-        doneArea.addEventListener("dragover", (event) =>
+        doneArea.addEventListener("dragover", (event: any) =>
             tasksList.onDragOver(event),
         );
-        doneArea.addEventListener("drop", (event) =>
+        doneArea.addEventListener("drop", (event: any) =>
             tasksList.onDrop(event, tasksList.done),
         );
     }
